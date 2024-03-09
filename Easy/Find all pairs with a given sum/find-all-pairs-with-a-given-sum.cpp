@@ -10,11 +10,11 @@ class Solution{
         vector<pair<int,int>> v;
         int i=0,j=0;
         
-        sort(A,A+N);
-        sort(B,B+M);
+        sort(A,A+N);	//sort array A
+        sort(B,B+M);	//sort array B
         
         while(i<N && j<M){
-            if(j==M-1){
+            if(j==M-1){	//if last element of the array B is reached
                 if((A[i]+B[j])==X){
                     v.push_back({A[i],B[j]});
                     i=i+1;
@@ -25,7 +25,7 @@ class Solution{
                     j=0;
                 }
             }
-            else{
+            else{	//if last element of array B is not reached
                 if((A[i]+B[j])==X){
                     v.push_back({A[i],B[j]});
                     j=j+1;
