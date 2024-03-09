@@ -49,6 +49,9 @@ Constraints:
 0 ≤ arr[i] ≤ 107
 */
 
+//This approach has the time complexity O(N*k)
+
+
 //{ Driver Code Starts
 //Initial template for C++
 
