@@ -15,7 +15,9 @@ class Solution{
     // k : find kth smallest element and return using this function
     int kthSmallest(int arr[], int l, int r, int k) {
         int n=r+1;
-        sort(arr,arr+ n);
+        sort(arr,arr+n); /*Here we take two parameters, the beginning of the
+    array and the length n upto which we want the array to
+    be sorted*/
         
         return arr[k-1];
     }
