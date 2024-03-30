@@ -1,7 +1,8 @@
 /*Count distinct elements in every window
-Easy Accuracy: 41.83% Submissions: 113K+ Points: 2
+Easy Accuracy: 41.83% Submissions: 114K+ Points: 2
 
-Given an array of integers and a number K. Find the count of distinct elements in every window of size K in the array.
+Given an array of integers and a number K. 
+Find the count of distinct elements in every window of size K in the array.
 
 Example 1:
 
@@ -32,8 +33,8 @@ Expected Auxiliary Space: O(N).
 
 Constraints:
 1 <= K <= N <= 105
-1 <= A[i] <= 105 , for each valid i
-*/
+1 <= A[i] <= 105 , for each valid i */
+
 
 //{ Driver Code Starts
 #include <bits/stdc++.h>
@@ -47,26 +48,18 @@ class Solution{
   public:
     vector <int> countDistinct (int A[], int n, int k)
     {
+        //Use unordered set as it stores unique elements in unordered format
+        unordered_set<int>window;
         vector<int>v;
-        int count;
         
-        int i=0,j=k-1;
-        while(i<n && j<n){
-            if(i<n && j<n){
-                map<int,int> mp;
-                for(int p=i;p<=j;p++){
-                    mp[A[p]]++;
-                }
-                
-                count=0;
-                
-                for(auto it:mp){
-                   count=count+1;
-                }
-                v.push_back(count);
+        for(int i=0;i<=n-k;i++){
+            window.clear(); //clearing window for every iteration
+            
+            for(int j=i;j<=(i+k-1);j++){
+                window.insert(A[j]);
             }
-            i=i+1;
-            j=i+k-1;
+            
+            v.push_back(window.size());
         }
         return v;
     }
@@ -94,12 +87,3 @@ int main()
     return 0;
 }
 // } Driver Code Ends
-
-/*
-Runtime Error 
-Test Cases Passed: 
-144 /260
-Time Limit Exceeded
-
-Your program took more time than expected.Expected Time Limit : 2.54sec
-*/
