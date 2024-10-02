@@ -9,31 +9,38 @@ class Solution{
 	
 	int MOD=pow(10,9)+7;
 	
-	int f(int index,int target,int arr[],vector<vector<int>>&dp){
-	    if(index==0){
-            if(target==0 && arr[0]==0) return 2; // both include and exclude
-            if(target==0 || arr[0]==target) return 1;
-            return 0;
+	int f(int index,int arr[],int currentSum,int sum,int n,
+	vector<vector<int>>&dp){
+	    
+        if(index>=n){
+            if(currentSum==sum){
+                return 1;
+            }
+            else{
+                return 0;
+            }
         }
-	    
-	    if(dp[index][target]!=-1){
-	        return dp[index][target];
-	    }
-	    
-	    int notTake=f(index-1,target,arr,dp)%MOD;
-	    int take=0;
-	    if(arr[index]<=target){
-	        take=f(index-1,target-arr[index],arr,dp)%MOD;
-	    }
-	    
-	    return dp[index][target]=(take+notTake)%MOD;
-	}
+        
+        if(dp[index][currentSum]!=-1){
+            return dp[index][currentSum];
+        }
+        
+        int notTake=f(index+1,arr,currentSum,sum,n,dp); //not Take
+        
+        int take=0;
+        if(currentSum+arr[index]<=sum){
+            //take
+            take=f(index+1,arr,currentSum+arr[index],sum,n,dp);
+        }
+        
+        return dp[index][currentSum]=(take+notTake)%MOD;
+    }
 	
 	int perfectSum(int arr[], int n, int sum)
 	{
-        vector<vector<int>>dp(n,vector<int>(sum+1,-1));
-        
-        return f(n-1,sum,arr,dp);
+        int currentSum=0;
+        vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
+        return f(0,arr,currentSum,sum,n,dp)%MOD;
         
 	}
 	  
